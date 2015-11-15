@@ -14,6 +14,7 @@ router.get '/', (req, res) ->
     else
       res.status(200).send people
 
+# TODO: Make this more robust by optionally saving instead of creating if _id is present
 router.post '/', (req, res) ->
   person = new Person(req.body)
 
@@ -37,6 +38,7 @@ router.get '/:id', (req, res) ->
       res.status(200).send people[0]
 
 router.put '/:id', (req, res) ->
+  console.log(req.body)
   Person.find {'_id': req.body['id']}, (err, people) ->
     if err
       res.status(500).send(err)
@@ -53,7 +55,7 @@ router.put '/:id', (req, res) ->
         if err
           res.status(500).send err
         else
-          res.status(202).send {'person': person }
+          res.status(202).send person
 
 router.delete '/:id', (req, res) ->
   Person.find {'_id': req.body['id']}, (err, people) ->
