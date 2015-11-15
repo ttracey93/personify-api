@@ -22,7 +22,7 @@ router.post '/', (req, res) ->
     if err
       res.status(500).send err
     else
-      res.status(201).send {'message': 'person created'}
+      res.status(201).send person
 
 router.param 'id', (req, res, next, value) ->
   req.body['id'] = value
@@ -71,6 +71,6 @@ router.delete '/:id', (req, res) ->
         if err
           res.status(500).send err
         else
-          res.status(203).send {'message': 'person deleted'}
+          res.status(203).send person
 
 module.exports = router
